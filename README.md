@@ -5,16 +5,22 @@ Technologies Used
 ==================
 Twilio
 Node.js
-ember.js
-IcedCoffeeScript
+CoffeeScript
 Jade
 Express.js
 Socket.io
+underscore.js
+backbone.js
+redis
+mongoose
+mongoose-express
 
 Requirements
 =============
 node.js
 mongo-db
+redis
+coffeescript
 
 Description
 ============
