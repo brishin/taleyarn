@@ -7,7 +7,7 @@ mongoose = require('mongoose')
 # Twilio Config
 TwilioClient = require('twilio').Client
 client = new TwilioClient(process.env.ACCOUNT_SID, 
-  process.env.AUTH_TOKEN, process.env.HOSTNAME)
+  process.env.AUTH_TOKEN, process.env.TW_HOSTNAME)
 phone = client.getPhoneNumber(process.env.PHONE_NUMBER)
 
 # DB - host, database, port, options
