@@ -16,8 +16,9 @@
   },
   "devDependencies": {
     "vows": "0.5.x",
-	"mocha": "*",
-	"should": "*"
+	  "mocha": "*",
+	  "should": "*",
+    "launch": ">=0"
   },
   "engine": "node >= 0.6.6"
 }
