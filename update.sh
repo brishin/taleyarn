@@ -1,6 +1,6 @@
 !#/bin/sh
 
 git pull
-stop node
-npm install
-start node
+sudo stop node
+sudo npm install
+sudo start node
