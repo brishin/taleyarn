@@ -1,7 +1,7 @@
 {
   "name": "YOUR-PROJECT-NAME-HERE",
   "description": "YOUR PROJECT DESCRIPTION HERE",
-  "author": "YOUR NAME <your@emailaddress.com>",
+  "author": "Andrew Pope <drewii2ii@gmail.com>, Brian Shin <ds2791@columbia.edu>",
   "version": "0.0.1",
   "dependencies": {
     "connect": "1.8.x",
@@ -20,5 +20,9 @@
 	  "should": "*",
     "launch": ">=0"
   },
-  "engine": "node >= 0.6.6"
+  "engine": "node >= 0.6.6",
+  "launchconf": {
+    "remote": "HOSTNAME",
+    "remotepath": "~/www/node"
+  }
 }
