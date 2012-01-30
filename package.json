@@ -1,5 +1,5 @@
 {
-  "name": "YOUR-PROJECT-NAME-HERE",
+  "name": "devfest2012",
   "description": "YOUR PROJECT DESCRIPTION HERE",
   "author": "Andrew Pope <drewii2ii@gmail.com>, Brian Shin <ds2791@columbia.edu>",
   "version": "0.0.1",
@@ -22,7 +22,7 @@
   },
   "engine": "node >= 0.6.6",
   "launchconf": {
-    "remote": "HOSTNAME",
-    "remotepath": "~/www/node"
+    "remote": "process.env.HOSTNAME",
+    "remotepath": "~/www/node/"
   }
 }
