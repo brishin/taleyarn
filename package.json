@@ -23,7 +23,7 @@
   },
   "engine": "node >= 0.6.6",
   "launchconf": {
-    "remote": "process.env.HOSTNAME",
+    "remote": "ip-10-245-91-190",
     "remotepath": "~/www/node/"
   }
 }
