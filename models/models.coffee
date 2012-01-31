@@ -12,7 +12,7 @@
   models.User = Backbone.model.extend({})
 
   models.Snippet = Backbone.model.extend
-    defaults: ()->
+    defaults: () ->
 
   models.Story = Backbone.Collection.extend
     model: models.Snippet
@@ -20,4 +20,13 @@
   # Views
   models.StoryView = Backbone.View.extend
     tagName: 'li'
-    template:
+    template: _.template($('#story-template').html())
+    events:
+      'click .edit': 'edit'
+    initialize: () ->
+      @model.bind('change', @render, @)
+      @model.bind('destroy', @remove, @)
+    render: () ->
+      @$el.html(@template(@model.toJSON()))
+      @setText()
+      @

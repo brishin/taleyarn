@@ -3,16 +3,13 @@ connect = require('connect')
 express = require('express')
 io = require('socket.io')
 mongoose = require('mongoose')
+api = require('./api.js')
 
 # Twilio Config
 TwilioClient = require('twilio').Client
 client = new TwilioClient(process.env.ACCOUNT_SID, 
   process.env.AUTH_TOKEN, process.env.TW_HOSTNAME)
 phone = client.getPhoneNumber(process.env.PHONE_NUMBER)
-
-# DB - host, database, port, options
-mongoose.connect(process.env.DB_HOST, process.env.DB_NAME,
-  process.env.DB_PORT)
 
 port = (process.env.PORT or 8081)
 
@@ -23,10 +20,20 @@ server.configure ->
   server.use connect.bodyParser()
   server.use express.cookieParser()
   server.use express.session(secret: process.env.SECRET)
-  server.use connect.static(__dirname + '/static')
   server.use server.router
 
-#Setup the Errors
+server.configure 'development', ->
+    app.use connect.static(__dirname + '/static')
+    app.use express.errorHandler
+      dumpExceptions: true
+      showStack: true
+
+server.configure 'production', ->
+  # DB - host, database, port, options
+  mongoose.connect(process.env.DB_HOST, process.env.DB_NAME,
+    process.env.DB_PORT)
+
+# Error setup
 server.error (err, req, res, next) ->
   if err instanceof NotFound
     res.render '404.jade',
@@ -63,6 +70,8 @@ server.get '/', (req, res) ->
       description: 'Your Page Description'
       author: 'Your Name'
       analyticssiteid: 'XXXXXXX'
+
+server.get '/story', api.storyList
 
 # Route for 500 Error
 server.get '/500', (req, res) ->
