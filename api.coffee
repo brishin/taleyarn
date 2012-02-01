@@ -22,5 +22,14 @@ module.exports = (server) ->
           throw err
         res.send(stories)
 
+  server.post '/stories', (req, res) ->
+    story = new Story(req.body.story)
+    story.author = req.sesion.auth.userId
+    story.save (err) ->
+      if (err)
+        utils.mongooseErrorHandler(err, req)
+      else
+        res.send(story)
+
   server.get '/stories/:id', (req, res) ->
     res.send(req.story)

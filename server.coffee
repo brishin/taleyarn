@@ -3,6 +3,7 @@ connect = require('connect')
 express = require('express')
 io = require('socket.io')
 mongoose = require('mongoose')
+mongooseAuth = require('mongoose-auth')
 
 # Twilio Config
 TwilioClient = require('twilio').Client
@@ -22,8 +23,8 @@ server.configure ->
   server.use server.router
 
 server.configure 'development', ->
-    app.use connect.static(__dirname + '/static')
-    app.use express.errorHandler
+    server.use connect.static(__dirname + '/static')
+    server.use express.errorHandler
       dumpExceptions: true
       showStack: true
 
@@ -31,6 +32,7 @@ server.configure 'production', ->
   # DB - host, database, port, options
   mongoose.connect(process.env.DB_HOST, process.env.DB_NAME,
     process.env.DB_PORT)
+  server.use express.errorHandler
 
 # Error setup
 server.error (err, req, res, next) ->
@@ -65,12 +67,10 @@ io.sockets.on 'connection', (socket) ->
 server.get '/', (req, res) ->
   res.render 'index.jade',
     locals:
-      title: 'Your Page Title'
-      description: 'Your Page Description'
-      author: 'Your Name'
+      title: 'Title'
       analyticssiteid: 'XXXXXXX'
 
-require('./api.js')
+require('./api`')
 
 # Route for 500 Error
 server.get '/500', (req, res) ->
