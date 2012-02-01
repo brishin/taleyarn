@@ -3,7 +3,6 @@ connect = require('connect')
 express = require('express')
 io = require('socket.io')
 mongoose = require('mongoose')
-api = require('./api.js')
 
 # Twilio Config
 TwilioClient = require('twilio').Client
@@ -71,7 +70,7 @@ server.get '/', (req, res) ->
       author: 'Your Name'
       analyticssiteid: 'XXXXXXX'
 
-server.get '/story', api.storyList
+require('./api.js')
 
 # Route for 500 Error
 server.get '/500', (req, res) ->
