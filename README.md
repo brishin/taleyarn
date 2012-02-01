@@ -3,26 +3,23 @@
 
 Technologies Used
 ==================
-Twilio
-Node.js
-CoffeeScript
-Jade
-Express.js
-Socket.io
-underscore.js
-backbone.js
-redis
-mongoose
-mongoose-express
+- Node.js
+- CoffeeScript
+- Jade
+- Express.js
+- Socket.io
+- Twilio
+- backbone.js
+- MongoDB
 
 Requirements
 =============
-node.js
-mongo-db
-redis
-coffeescript
+- node.js
+- mongo-db
+- redis
+- coffeescript
 
 Description
 ============
 
-Tell a story one sms at a time.
+A platform for social, spontaneous storytelling through the interwebs.
