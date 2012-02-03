@@ -11,6 +11,6 @@ exports.setup = (server, client, conf) ->
 
   phone.setup () ->
     console.log 'Started.'
-    phone.on 'incomingSms', (req, res) ->
+    phone.on 'incomingSMS', (req, res) ->
       console.log('Received incoming SMS with text: ' + req.Body)
       console.log('From: ' + req.From)
