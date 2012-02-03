@@ -47,6 +47,18 @@ exports.setup = (conf, port) ->
         appId: conf.github.appId
         appSecret: conf.github.appSecret
         redirectPath: '/'
+    instagram:
+      everyauth:
+      	myHostname: 'http://localhost:' + port
+      	appId: conf.instagram.clientId
+      	appSecret: conf.instagram.clientSecret
+      	redirectPath: '/'
+    foursquare:
+      everyauth:
+      	myHostname: 'http://localhost:' + port
+      	appId: conf.foursquare.clientId
+      	appSecret: conf.foursquare.clientSecret
+      	redirectPath: '/'
     google:
       everyauth:
         myHostname: 'http://localhost:' + port
