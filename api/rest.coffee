@@ -1,3 +1,4 @@
+mongoose = require('mongoose')
 Story = mongoose.model('Story')
 
 module.exports = (server) ->
