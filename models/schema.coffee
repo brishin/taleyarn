@@ -4,6 +4,8 @@ ObjectId = Schema.ObjectId
 
 Story = new Schema
   author: ObjectId
+  genre: String
+  authorStyle: String
   title:
     type: String
     required: true

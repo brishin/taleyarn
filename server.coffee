@@ -4,14 +4,9 @@ express = require('express')
 io = require('socket.io')
 mongoose = require('mongoose')
 mongooseAuth = require('mongoose-auth')
+conf = require('./conf')
 
-# Twilio Config
-TwilioClient = require('twilio').Client
-client = new TwilioClient(process.env.ACCOUNT_SID, 
-  process.env.AUTH_TOKEN, process.env.TW_HOSTNAME)
-phone = client.getPhoneNumber(process.env.PHONE_NUMBER)
-
-port = (process.env.PORT or 8081)
+port = (conf.port or 8081)
 
 # Setup Express
 server = express.createServer()
@@ -19,19 +14,19 @@ server.configure ->
   server.set 'views', __dirname + '/views'
   server.use connect.bodyParser()
   server.use express.cookieParser()
-  server.use express.session(secret: process.env.SECRET)
+  server.use express.session(secret: conf.secret)
   server.use server.router
 
 server.configure 'development', ->
-    server.use connect.static(__dirname + '/static')
-    server.use express.errorHandler
-      dumpExceptions: true
-      showStack: true
+  server.use connect.static(__dirname + '/static')
+  server.use express.errorHandler
+    dumpExceptions: true
+    showStack: true
 
 server.configure 'production', ->
   # DB - host, database, port, options
-  mongoose.connect(process.env.DB_HOST, process.env.DB_NAME,
-    process.env.DB_PORT)
+  mongoose.connect(conf.dbHost, conf.dbName,
+    conf.dbPort)
   server.use express.errorHandler
 
 # Error setup
@@ -63,6 +58,10 @@ io.sockets.on 'connection', (socket) ->
   socket.on 'list', () ->
     socket.emit ''
 
+# Twilio
+twilio = require('./twilio')
+twilio.setup()
+
 # Routes
 server.get '/', (req, res) ->
   res.render 'index.jade',
@@ -70,7 +69,7 @@ server.get '/', (req, res) ->
       title: 'Title'
       analyticssiteid: 'XXXXXXX'
 
-require('./api`')
+# require('./api`')
 
 # Route for 500 Error
 server.get '/500', (req, res) ->
