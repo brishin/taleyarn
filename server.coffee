@@ -33,7 +33,7 @@ server.configure 'production', ->
 # Setup MongooseAuth
 mongooseAuth.helpExpress
 auth = require(__dirname + '/auth')
-auth.setup conf, port
+auth.setup
 
 # Error setup
 server.error (err, req, res, next) ->
@@ -66,7 +66,7 @@ io.sockets.on 'connection', (socket) ->
 
 # Twilio
 twilioAPI = require(__dirname + '/api/twilio')
-twilioAPI.setdown()
+twilioAPI.setup()
 
 # Routes
 server.get '/', (req, res) ->
