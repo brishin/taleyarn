@@ -7,7 +7,7 @@ mongooseAuth = require('mongoose-auth')
 coffeeScript = require('coffee-script')
 conf = require(__dirname + '/conf')
 
-port = (conf.port or 8081)
+port = (conf.server.port or 8081)
 
 # Setup Express
 server = express.createServer()
@@ -26,15 +26,14 @@ server.configure 'development', ->
 
 server.configure 'production', ->
   # DB - host, database, port, options
-  mongoose.connect(conf.dbHost, conf.dbName,
-    conf.dbPort)
+  mongoose.connect(conf.db.host, conf.db.name, conf.db.port)
   server.use mongooseAuth.middleware
   server.use express.errorHandler
 
 # Setup MongooseAuth
-mongooseAuth.helpExpress server
-auth = require(__dirname + 'auth')
-auth.setup
+mongooseAuth.helpExpress
+auth = require(__dirname + '/auth')
+auth.setup conf, port
 
 # Error setup
 server.error (err, req, res, next) ->

@@ -1,6 +1,5 @@
-exports.setup = (server) ->
-  conf = require __dirname + '/config/oauth_providers'
-  UserSchema = new Schema([])
+exports.setup = (conf, port) ->
+  UserSchema = new Schema({})
   mongooseAuth = require 'mongoose-auth'
 
   UserSchema.plugin mongooseAuth,
