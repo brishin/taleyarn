@@ -1,9 +1,8 @@
 #Story = mongoose.model('Story')
 #Snippet = mongoose.model('Snippet')
 #User = mongoose.model('User')
-conf = require('../conf')
 
-exports.setup = (server, client) ->
+exports.setup = (server, client, conf) ->
   # Twilio
   TwilioClient = require('twilio').Client
   client = new TwilioClient(conf.twilio.accountSID, 
