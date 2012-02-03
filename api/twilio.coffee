@@ -3,7 +3,7 @@
 #User = mongoose.model('User')
 conf = require('../conf')
 
-exports.setdown = (server, client) ->
+exports.setup = (server, client) ->
   # Twilio
   TwilioClient = require('twilio').Client
   client = new TwilioClient(conf.twilio.accountSID, 
