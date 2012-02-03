@@ -1,8 +1,9 @@
 mongoose = require 'mongoose'
+conf = require '../conf'
+mongoose.connect conf.db.host, conf.db.name, conf.db.port
+Story = mongoose.model 'Story'
 
 module.exports = (server, conf) ->
-  mongoose.connect conf.db.host, conf.db.name, conf.db.port
-  Story = mongoose.model 'Story'
 
   app.param 'id', (req, res, next, id) ->
     Story
