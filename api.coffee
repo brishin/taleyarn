@@ -1,7 +1,6 @@
 Story = mongoose.model('Story')
 
 module.exports = (server) ->
-  
   app.param 'id', (req, res, next, id) ->
     Story
       .findById(req.params.id)
