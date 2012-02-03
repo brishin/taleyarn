@@ -1,4 +1,4 @@
-module.exports = (server, conf) ->
+module.exports = (server, conf, mongoose) ->
   mongoose.connect conf.db.host, conf.db.name, conf.db.port
   Story = mongoose.model 'Story'
 
