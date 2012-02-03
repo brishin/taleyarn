@@ -1,5 +1,6 @@
-mongoose = require('mongoose')
-Story = mongoose.model('Story')
+mongoose = require 'mongoose'
+mongoose.connect conf.db.host, conf.db.name, conf.db.port
+Story = mongoose.model 'Story'
 
 module.exports = (server) ->
   

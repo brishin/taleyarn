@@ -2,7 +2,7 @@ mongoose = require('mongoose')
 Schema = mongoose.Schema
 ObjectId = Schema.ObjectId
 
-StorySchema = new Schema
+Story = new Schema
   author: ObjectId
   genre: String
   authorStyle: String
@@ -16,7 +16,7 @@ StorySchema = new Schema
   smsCode: String
   snippets: [Snippet]
 
-SnippetSchema = new Schema
+Snippet = new Schema
   author: ObjectId
   title: 
     type: String
@@ -29,8 +29,5 @@ SnippetSchema = new Schema
     default: Date.now
   dateModified: Date
 
-mongoose.model 'Story', StorySchema
-mongoose.model 'Snippet', SnippetSchema
-
-Story = mongoose.model 'Story'
-Snippet = mongoose.model 'Snippet'
+mongoose.model 'Story', Story
+mongoose.model 'Snippet', Snippet
