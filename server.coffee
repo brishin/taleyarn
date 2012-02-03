@@ -26,14 +26,9 @@ server.configure 'development', ->
 
 server.configure 'production', ->
   # DB - host, database, port, options
-<<<<<<< HEAD
-  mongoose.connect(conf.db.host, conf.db.name,
-    conf.db.port)
-=======
   mongoose.connect(conf.dbHost, conf.dbName,
     conf.dbPort)
   server.use mongooseAuth.middleware
->>>>>>> Added auth framework, and testing views
   server.use express.errorHandler
 
 # Setup MongooseAuth
