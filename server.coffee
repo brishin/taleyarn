@@ -27,13 +27,13 @@ server.configure 'development', ->
 server.configure 'production', ->
   # DB - host, database, port, options
   mongoose.connect(conf.db.host, conf.db.name, conf.db.port)
-  server.use mongooseAuth.middleware
+  mongooseAuth.middleware
   server.use express.errorHandler
 
-# Setup MongooseAuth
-mongooseAuth.helpExpress
-auth = require(__dirname + '/auth')
-auth.setup
+  # Setup MongooseAuth
+  mongooseAuth.helpExpress
+  auth = require(__dirname + '/auth')
+  auth.setup
 
 # Error setup
 server.error (err, req, res, next) ->
@@ -75,7 +75,7 @@ server.get '/', (req, res) ->
       title: 'Title'
       analyticssiteid: 'XXXXXXX'
 
-# require(__dirname + './api')
+require(__dirname + './rest')
 
 # Route for logout
 server.get '/logout', (req, res) ->
