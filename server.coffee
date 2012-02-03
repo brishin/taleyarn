@@ -75,7 +75,7 @@ server.get '/', (req, res) ->
       title: 'Title'
       analyticssiteid: 'XXXXXXX'
 
-require(__dirname + '/rest')
+require(__dirname + '/api/rest')
 
 # Route for logout
 server.get '/logout', (req, res) ->
