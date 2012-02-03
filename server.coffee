@@ -26,9 +26,20 @@ server.configure 'development', ->
 
 server.configure 'production', ->
   # DB - host, database, port, options
+<<<<<<< HEAD
   mongoose.connect(conf.db.host, conf.db.name,
     conf.db.port)
+=======
+  mongoose.connect(conf.dbHost, conf.dbName,
+    conf.dbPort)
+  server.use mongooseAuth.middleware
+>>>>>>> Added auth framework, and testing views
   server.use express.errorHandler
+
+# Setup MongooseAuth
+mongooseAuth.helpExpress server
+auth = require(__dirname + 'auth')
+auth.setup
 
 # Error setup
 server.error (err, req, res, next) ->
@@ -71,6 +82,11 @@ server.get '/', (req, res) ->
       analyticssiteid: 'XXXXXXX'
 
 # require(__dirname + './api')
+
+# Route for logout
+server.get '/logout', (req, res) ->
+  req.logout
+  res.redirect '/'
 
 # Route for 500 Error
 server.get '/500', (req, res) ->
