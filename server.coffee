@@ -4,7 +4,8 @@ express = require('express')
 io = require('socket.io')
 mongoose = require('mongoose')
 mongooseAuth = require('mongoose-auth')
-conf = require('./conf')
+coffeeScript = require('coffee-script')
+conf = require(__dirname + '/conf')
 
 port = (conf.port or 8081)
 
@@ -14,7 +15,7 @@ server.configure ->
   server.set 'views', __dirname + '/views'
   server.use connect.bodyParser()
   server.use express.cookieParser()
-  server.use express.session(secret: conf.secret)
+  server.use express.session(secret: conf.server.secret)
   server.use server.router
 
 server.configure 'development', ->
@@ -25,8 +26,8 @@ server.configure 'development', ->
 
 server.configure 'production', ->
   # DB - host, database, port, options
-  mongoose.connect(conf.dbHost, conf.dbName,
-    conf.dbPort)
+  mongoose.connect(conf.db.host, conf.db.name,
+    conf.db.port)
   server.use express.errorHandler
 
 # Error setup
@@ -59,8 +60,8 @@ io.sockets.on 'connection', (socket) ->
     socket.emit ''
 
 # Twilio
-twilio = require('./twilio')
-twilio.setup()
+twilioAPI = require(__dirname + '/api/twilio')
+twilioAPI.setdown()
 
 # Routes
 server.get '/', (req, res) ->
@@ -69,7 +70,7 @@ server.get '/', (req, res) ->
       title: 'Title'
       analyticssiteid: 'XXXXXXX'
 
-# require('./api`')
+# require(__dirname + './api')
 
 # Route for 500 Error
 server.get '/500', (req, res) ->
