@@ -1,7 +1,7 @@
 mongoose = require('mongoose')
 conf = require('../conf')
 
-exports.setup = (server, client) ->
+exports.setup = () ->
   mongoose.connect conf.db.host, conf.db.name, conf.db.port
 
   Story = mongoose.model('Story')
@@ -15,10 +15,7 @@ exports.setup = (server, client) ->
   phone = client.getPhoneNumber(conf.twilio.phoneNumber)
 
   phone.setup () ->
-    console.log 'Twilio server up.'
+    console.log 'Twilio server up at ' + conf.twilio.twHostname
     phone.on 'incomingSMS', (req, res) ->
-      smsHandler(req, res)
-
-smsHandler = (req, res) ->
-  console.log('Received incoming SMS with text: ' + req.Body)
-  console.log('From: ' + req.From)
+      console.log('Received incoming SMS with text: ' + req.Body)
+      console.log('From: ' + req.From)
