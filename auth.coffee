@@ -5,7 +5,9 @@ exports.setup = (port) ->
   Schema = mongoose.Schema
   ObjectId = mongoose.SchemaTypes.ObjectId
 
-  UserSchema = new Schema({})
+  UserSchema = new Schema
+    snippets: [ObjectId]
+
   mongooseAuth = require 'mongoose-auth'
 
   UserSchema.plugin mongooseAuth,

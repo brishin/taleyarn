@@ -15,6 +15,21 @@ Story = new Schema
   dateModified: Date
   smsCode: String
   snippets: [Snippet]
+  userList: ObjectId
+  sizeUserList: Number
+  nextUser: ObjectId
+  currentNumUsers:
+    type: Number
+    default: 0
+  maxUsers: Number
+
+UserList = new Schema
+  user:
+    type: ObjectId
+    unique: true
+  listIndex:
+    type: Number
+    unique: true
 
 Snippet = new Schema
   author: ObjectId

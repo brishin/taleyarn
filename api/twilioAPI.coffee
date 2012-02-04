@@ -28,8 +28,21 @@ exports.setup = () ->
             'password.extraparams.phone': req.From
           newUser.save()
           console.log 'New user created.'
-          sys.inspect newUser
-          return
-        console.log 'User found.'
-        sys.inspect doc
-          
+          # Send welcome message.
+          phone.sendSms req.From, conf.copy.twilioNew, null, (mess) ->
+            console.log 'Welcome message sent.'
+            addToStory(newUser)
+        else
+          console.log 'User found.'
+
+addToStory = (newUser, callback) ->
+  Story
+    .findOne({})
+    .sort('curretNumUsers': 1)
+    .run(err, doc) ->
+      userId = newUser._id
+      doc.userList.push
+        user: userId
+        
+
+sendToNextUser = (callback) ->
