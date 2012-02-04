@@ -3,8 +3,7 @@ exports.setup = (conf, port) ->
   Schema = mongoose.Schema
   ObjectId = mongoose.SchemaTypes.ObjectId
 
-  UserSchema = new Schema
-    phone: String
+  UserSchema = new Schema({})
   mongooseAuth = require 'mongoose-auth'
 
   UserSchema.plugin mongooseAuth,
