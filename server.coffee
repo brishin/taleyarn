@@ -99,6 +99,13 @@ server.get '/register', (req, res) ->
       title: 'Register'
       analyticssiteid: conf.analytics.id
 
+# Route for login testing
+server.get '/home', (req, res) ->
+  res.render 'home.jade'
+    locals:
+      title: 'Home'
+      analyticssiteid: conf.analytics.id
+
 # Route for 500 Error
 server.get '/500', (req, res) ->
   throw new Error('This is a 500 Error')
