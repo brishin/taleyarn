@@ -69,7 +69,7 @@ io.sockets.on 'connection', (socket) ->
 
 # Twilio
 twilioAPI = require(__dirname + '/api/twilioAPI')
-twilioAPI.setup
+twilioAPI.setup()
 
 # Routes
 server.get '/', (req, res) ->
