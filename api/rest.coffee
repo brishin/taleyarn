@@ -1,4 +1,6 @@
-module.exports = (server, conf, mongoose) ->
+conf = require '../conf'
+
+module.exports = (server, mongoose) ->
   mongoose.connect conf.db.host, conf.db.name, conf.db.port
   Story = mongoose.model 'Story'
 

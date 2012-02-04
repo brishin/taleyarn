@@ -1,4 +1,6 @@
-exports.setup = (conf, port) ->
+conf = require 'conf'
+
+exports.setup = (port) ->
   mongoose = require('mongoose')
   Schema = mongoose.Schema
   ObjectId = mongoose.SchemaTypes.ObjectId
