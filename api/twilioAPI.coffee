@@ -22,8 +22,13 @@ exports.setup = () ->
       console.log('From: ' + req.From)
       currentUser = User.findOne {'password.extraparams.phone': req.from}, (err, doc) ->
         if err
+          throw new Error
+        if doc
+          console.log 'User found.'
+          sys.inspect doc
+        else
           newUser = new User
             'password.extraparams.phone': req.From
+          newUser.save()
           console.log 'New user created.'
-        console.log 'User found.'
-        sys.inspect doc
+          sys.inspect newUser
