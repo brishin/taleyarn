@@ -21,7 +21,7 @@ module.exports = (server, mongoose) ->
       .desc('created_at')
       .run (err, stories) ->
         if (err)
-          throw err
+          throw errs
         res.send(stories)
 
   server.post '/stories', (req, res) ->

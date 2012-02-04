@@ -39,7 +39,7 @@ exports.setup = () ->
 addToStory = (newUser, callback) ->
   Story
     .findOne({})
-    .sort('curretNumUsers': 1)
+    .sort('currentNumUsers': 1)
     .run(err, doc) ->
       userId = newUser._id
       doc.userList.push
@@ -47,5 +47,17 @@ addToStory = (newUser, callback) ->
       doc.nextUser = userId
       doc.sizeUserList.$inc
       doc.save()
+        user: userId
+        
+sendToNextUser = (currentNumber, callback) ->
+  findUserByNumber currentNumber, (doc) ->
+    Story
+      .find()
 
-sendToNextUser = (callback) ->
+findUserByNumber = (number, callback) ->
+  User.findOne {'password.extraparams.phone': req.From}, (err, doc) ->
+    if err
+      throw new Error
+    if doc
+      callback(doc)
+    return undefined
