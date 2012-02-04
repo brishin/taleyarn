@@ -33,7 +33,7 @@ server.configure 'production', ->
   # Setup MongooseAuth
   mongooseAuth.helpExpress
   auth = require(__dirname + '/auth')
-  auth.setup
+  auth.setup()
 
   # Load Schema
   Schema = require __dirname + '/models/schema'
