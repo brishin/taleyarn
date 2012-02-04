@@ -8,6 +8,7 @@ exports.setup = () ->
   Story = mongoose.model('Story')
   Snippet = mongoose.model('Snippet')
   User = mongoose.model('User')
+  AbstractUser = mongoose.model('AbstractUser')
 
   # Twilio
   TwilioClient = require('twilio').Client
@@ -42,7 +43,9 @@ addToStory = (newUser, callback) ->
     .run(err, doc) ->
       userId = newUser._id
       doc.userList.push
-        user: userId
-        
+        new AbstractUser(userId, doc.sizeUserList)
+      doc.nextUser = userId
+      doc.sizeUserList.$inc
+      doc.save()
 
 sendToNextUser = (callback) ->

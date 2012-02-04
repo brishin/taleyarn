@@ -15,7 +15,7 @@ Story = new Schema
   dateModified: Date
   smsCode: String
   snippets: [Snippet]
-  userList: ObjectId
+  userList: [AbstractUser]
   sizeUserList: Number
   nextUser: ObjectId
   currentNumUsers:
@@ -23,7 +23,7 @@ Story = new Schema
     default: 0
   maxUsers: Number
 
-UserList = new Schema
+AbstractUser = new Schema
   user:
     type: ObjectId
     unique: true
@@ -46,3 +46,4 @@ Snippet = new Schema
 
 mongoose.model 'Story', Story
 mongoose.model 'Snippet', Snippet
+mongoose.model 'AbstractUser', AbstractUser
