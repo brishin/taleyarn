@@ -35,6 +35,9 @@ server.configure 'production', ->
   auth = require(__dirname + '/auth')
   auth.setup
 
+  # Load Schema
+  Schema = require 'models/schema'
+
 # Error setup
 server.error (err, req, res, next) ->
   if err instanceof NotFound
@@ -43,7 +46,7 @@ server.error (err, req, res, next) ->
         title: '404 - Not Found'
         description: ''
         author: ''
-        analyticssiteid: 'XXXXXXX'
+        analyticssiteid: conf.analytics.id
       status: 404
   else
     res.render '500.jade',
@@ -51,7 +54,7 @@ server.error (err, req, res, next) ->
         title: 'The Server Encountered an Error'
         description: ''
         author: ''
-        analyticssiteid: 'XXXXXXX'
+        analyticssiteid: conf.analytics.id
         error: err
       status: 500
 server.listen port
@@ -72,7 +75,7 @@ server.get '/', (req, res) ->
   res.render 'index.jade',
     locals:
       title: 'Title'
-      analyticssiteid: 'XXXXXXX'
+      analyticssiteid: conf.analytics.id
 
 require(__dirname + '/api/rest')
 
@@ -80,6 +83,20 @@ require(__dirname + '/api/rest')
 server.get '/logout', (req, res) ->
   req.logout
   res.redirect '/'
+
+# Route for login
+server.get '/login', (req, res) ->
+  res.render 'login.jade'
+    locals:
+      title: 'Login'
+      analyticssiteid: conf.analytics.id
+
+# Route for registering
+server.get '/register', (req, res) ->
+  res.render 'register.jade'
+    locals:
+      title: 'Register'
+      analyticssiteid: conf.analytics.id
 
 # Route for 500 Error
 server.get '/500', (req, res) ->
