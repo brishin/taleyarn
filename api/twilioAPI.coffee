@@ -47,12 +47,20 @@ addToStory = (newUser, callback) ->
       doc.nextUser = userId
       doc.sizeUserList.$inc
       doc.save()
-        user: userId
+
+saveToStory = (mess, currentNumber, callback) ->
+  currentUser = findUserByNumber currentNumber, (doc) ->
+    newSnippet = new Snippet
+      author: currentUser
+      story: currentUser.story
+      body: mess
+    newSnippet.save()
+    currentUser.story.snippets.append(newSnippet)
+    currentUser.story.save()
+    callback(currentUser)
         
-sendToNextUser = (currentNumber, callback) ->
-  findUserByNumber currentNumber, (doc) ->
-    Story
-      .find()
+sendToNextUser = (currentUser, callback) ->
+  nextUser = currentUser.story.userList.find()
 
 findUserByNumber = (number, callback) ->
   User.findOne {'password.extraparams.phone': req.From}, (err, doc) ->

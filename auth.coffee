@@ -7,6 +7,7 @@ exports.setup = (port) ->
 
   UserSchema = new Schema
     snippets: [ObjectId]
+    currentStory: ObjectId
 
   mongooseAuth = require 'mongoose-auth'
 

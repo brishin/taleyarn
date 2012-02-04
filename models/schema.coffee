@@ -33,9 +33,7 @@ AbstractUser = new Schema
 
 Snippet = new Schema
   author: ObjectId
-  title: 
-    type: String
-    required: true
+  story: ObjectId
   body:
     type: String
     required: true
