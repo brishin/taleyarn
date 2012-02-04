@@ -1,4 +1,4 @@
-conf = require 'conf'
+conf = require __dirname + '/conf'
 
 exports.setup = (port) ->
   mongoose = require('mongoose')
