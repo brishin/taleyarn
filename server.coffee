@@ -36,7 +36,7 @@ server.configure 'production', ->
   auth.setup
 
   # Load Schema
-  Schema = require 'models/schema'
+  Schema = require __dirname + '/models/schema'
 
 # Error setup
 server.error (err, req, res, next) ->
