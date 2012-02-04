@@ -1,6 +1,7 @@
 conf = require('../conf')
+mongoose = require('mongoose')
 
-exports.setup = (server, client, mongoose) ->
+exports.setup = (server, client) ->
   mongoose.connect conf.db.host, conf.db.name, conf.db.port
   Story = mongoose.model('Story')
   Snippet = mongoose.model('Snippet')
