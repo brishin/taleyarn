@@ -5,9 +5,12 @@ io = require('socket.io')
 mongoose = require('mongoose')
 mongooseAuth = require('mongoose-auth')
 coffeeScript = require('coffee-script')
+everyauth = require 'everyauth'
 conf = require(__dirname + '/conf')
 
 port = (conf.server.port or 8081)
+
+everyauth.debug = true
 
 # Setup Express
 server = express.createServer()
@@ -86,21 +89,21 @@ server.get '/logout', (req, res) ->
 
 # Route for login
 server.get '/login', (req, res) ->
-  res.render 'login.jade'
+  res.render 'login'
     locals:
       title: 'Login'
       analyticssiteid: conf.analytics.id
 
 # Route for registering
 server.get '/register', (req, res) ->
-  res.render 'register.jade'
+  res.render 'register'
     locals:
       title: 'Register'
       analyticssiteid: conf.analytics.id
 
 # Route for login testing
 server.get '/home', (req, res) ->
-  res.render 'home.jade'
+  res.render 'home'
     locals:
       title: 'Home'
       analyticssiteid: conf.analytics.id
