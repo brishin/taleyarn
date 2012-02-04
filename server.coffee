@@ -89,21 +89,21 @@ server.get '/logout', (req, res) ->
 
 # Route for login
 server.get '/login', (req, res) ->
-  res.render 'login'
+  res.render 'login.jade'
     locals:
       title: 'Login'
       analyticssiteid: conf.analytics.id
 
 # Route for registering
 server.get '/register', (req, res) ->
-  res.render 'register'
+  res.render 'register.jade'
     locals:
       title: 'Register'
       analyticssiteid: conf.analytics.id
 
 # Route for login testing
 server.get '/home', (req, res) ->
-  res.render 'home'
+  res.render 'home.jade'
     locals:
       title: 'Home'
       analyticssiteid: conf.analytics.id
