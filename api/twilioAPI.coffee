@@ -20,10 +20,10 @@ exports.setup = () ->
     phone.on 'incomingSms', (req, res) ->
       console.log('Received incoming SMS with text: ' + req.Body)
       console.log('From: ' + req.From)
-      currentUser = User.findOne {password.extraparams.phone: req.from}, (err, doc) ->
+      currentUser = User.findOne {'password.extraparams.phone': req.from}, (err, doc) ->
         if err
           newUser = new User
-            password.extraparams.phone: req.From
+            'password.extraparams.phone': req.From
           console.log 'New user created.'
         console.log 'User found.'
         sys.inspect doc
