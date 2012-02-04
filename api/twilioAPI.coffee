@@ -1,5 +1,6 @@
 mongoose = require('mongoose')
 conf = require('../conf')
+sys = require('sys')
 
 exports.setup = () ->
   mongoose.connect conf.db.host, conf.db.name, conf.db.port
@@ -16,6 +17,13 @@ exports.setup = () ->
 
   phone.setup () ->
     console.log 'Twilio server up at ' + conf.twilio.twHostname
-    phone.on 'incomingSMS', (req, res) ->
+    phone.on 'incomingSms', (req, res) ->
       console.log('Received incoming SMS with text: ' + req.Body)
       console.log('From: ' + req.From)
+      currentUser = User.findOne {password.extraparams.phone: req.from}, (err, doc) ->
+        if err
+          newUser = new User
+            password.extraparams.phone: req.From
+          console.log 'New user created.'
+        console.log 'User found.'
+        sys.inspect doc
